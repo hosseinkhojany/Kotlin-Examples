@@ -2,8 +2,6 @@ package channel.example5
 
 import channel.*
 
-// https://tour.golang.org/concurrency/5
-
 suspend fun fibonacci(c: SendChannel<Int>, quit: ReceiveChannel<Int>) {
     var x = 0
     var y = 1

@@ -6,9 +6,9 @@ import kotlin.coroutines.*
 suspend fun <T> CompletableFuture<T>.await(): T =
     suspendCoroutine<T> { cont: Continuation<T> ->
         whenComplete { result, exception ->
-            if (exception == null) // the future has been completed normally
+            if (exception == null)
                 cont.resume(result)
-            else // the future has completed with an exception
+            else
                 cont.resumeWithException(exception)
         }
     }

@@ -1,9 +1,5 @@
 package generator
 
-// Samples are inspired by https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function*
-
-// Example with yieldAll
-
 fun anotherGenerator(i: Int) = generate<Int, Unit> {
     yield(i + 1)
     yield(i + 2)

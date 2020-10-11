@@ -4,8 +4,6 @@ import channel.*
 import delay.*
 import java.util.*
 
-// https://talks.golang.org/2012/concurrency.slide#25
-
 suspend fun boring(msg: String): ReceiveChannel<String> { // returns receive-only channel of strings
     val c = Channel<String>()
     val rnd = Random()

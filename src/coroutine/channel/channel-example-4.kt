@@ -2,8 +2,6 @@ package channel.example4
 
 import channel.*
 
-// https://tour.golang.org/concurrency/4
-
 suspend fun fibonacci(n: Int, c: SendChannel<Int>) {
     var x = 0
     var y = 1

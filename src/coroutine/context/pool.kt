@@ -14,7 +14,6 @@ open class Pool(val pool: ForkJoinPool) : AbstractCoroutineContextElement(Contin
                 element.interceptContinuation(cont) else cont
         })
 
-    // runs new coroutine in this pool in parallel (schedule to a different thread)
     fun runParallel(block: suspend () -> Unit) {
         pool.execute { launch(this, block) }
     }

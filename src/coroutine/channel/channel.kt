@@ -12,8 +12,8 @@ interface SendChannel<T> {
 }
 
 interface ReceiveChannel<T> {
-    suspend fun receive(): T // throws NoSuchElementException on closed channel
-    suspend fun receiveOrNull(): T? // returns null on closed channel
+    suspend fun receive(): T
+    suspend fun receiveOrNull(): T?
     fun <R> selectReceive(a: ReceiveCase<T, R>): Boolean
     suspend operator fun iterator(): ReceiveIterator<T>
 }
@@ -25,11 +25,11 @@ interface ReceiveIterator<out T> {
 
 private const val CHANNEL_CLOSED = "Channel was closed"
 
-private val channelCounter = AtomicLong() // number channels for debugging
+private val channelCounter = AtomicLong()
 
 class Channel<T>(val capacity: Int = 1) : SendChannel<T>, ReceiveChannel<T> {
     init { require(capacity >= 1) }
-    private val number = channelCounter.incrementAndGet() // for debugging
+    private val number = channelCounter.incrementAndGet()
     private var closed = false
     private val buffer = ArrayDeque<T>(capacity)
     private val waiters = SentinelWaiter<T>()
@@ -52,17 +52,17 @@ class Channel<T>(val capacity: Int = 1) : SendChannel<T>, ReceiveChannel<T> {
             }
         }
         receiveWaiter?.resumeReceive(value)
-        c.resume(Unit) // sent -> resume this coroutine right away
+        c.resume(Unit)
     }
 
     override fun <R> selectSend(a: SendCase<T, R>): Boolean {
         var receiveWaiter: Waiter<T>? = null
         locked {
-            if (a.selector.resolved) return true // already resolved selector, do nothing
+            if (a.selector.resolved) return true
             check(!closed) { CHANNEL_CLOSED }
             if (full) {
                 addWaiter(a)
-                return false // suspended
+                return false
             } else {
                 receiveWaiter = unlinkFirstWaiter()
                 if (receiveWaiter == null) {

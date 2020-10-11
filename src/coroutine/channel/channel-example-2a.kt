@@ -4,7 +4,6 @@ import channel.*
 import kotlin.system.*
 
 suspend fun sum(s: List<Int>, c: SendChannel<Int>) {
-    // simulate long-running CPU-consuming computation
     var sum = 0
     val time = measureTimeMillis {
         repeat(100_000_000) {

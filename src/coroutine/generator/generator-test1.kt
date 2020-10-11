@@ -1,9 +1,5 @@
 package generator
 
-// Samples are inspired by https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function*
-
-// Simple example
-
 fun idMaker() = generate<Int, Unit> {
     var index = 0
     while (index < 3)

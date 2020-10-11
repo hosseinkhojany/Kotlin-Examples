@@ -3,8 +3,6 @@ package channel.multiplexing
 import channel.*
 import channel.boring.*
 
-// https://talks.golang.org/2012/concurrency.slide#27
-
 suspend fun fanIn(input1: ReceiveChannel<String>, input2: ReceiveChannel<String>): ReceiveChannel<String> {
     val c = Channel<String>()
     go {

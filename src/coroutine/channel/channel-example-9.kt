@@ -4,8 +4,6 @@ import channel.*
 import delay.*
 import mutex.*
 
-// https://tour.golang.org/concurrency/9
-
 class SafeCounter {
     private val v = mutableMapOf<String, Int>()
     private val mux = Mutex()

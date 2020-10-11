@@ -3,9 +3,6 @@ package channel.example8
 import channel.*
 import java.util.*
 
-// https://tour.golang.org/concurrency/7
-// https://tour.golang.org/concurrency/8
-
 val treeSize = 10
 
 suspend fun Tree.walk(ch: SendChannel<Int>): Unit {

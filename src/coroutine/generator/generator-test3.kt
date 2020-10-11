@@ -1,8 +1,5 @@
 package generator
 
-// Samples are inspired by https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/function*
-
-// Passing arguments into Generators
 
 fun logGenerator() = generate<Unit, String> {
     println("Started with $it")
